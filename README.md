@@ -12,11 +12,6 @@ $ cd OSCP-FIleTransfer
 # install the requirements
 $ pip install argparse pyftpdlib impacket
 ```
-
-
-$pip install argparse pyftpdlib impacket
-
-```
 ## Usage
 
 ```python

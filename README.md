@@ -11,7 +11,7 @@ $ git clone https://github.com/Bit-ByteBandit/OSCP-FIleTransfer.git
 $ cd OSCP-FIleTransfer
 
 # install the requirements
-$ pip install argparse pyftpdlib impacket
+$ python3 -m pip install -r requirements.txt
 ```
 ## Usage
 

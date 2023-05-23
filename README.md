@@ -1,5 +1,6 @@
 # OSCP-FIleTransfer
-This repo for making it easy to transfer files on the OSCP exam using FTP,PUT,SMB
+
+i write this repo to make it easy to transfer files on the OSCP exam using FTP,PUT,SMB protocols
 
 ## Instaltion
 ```

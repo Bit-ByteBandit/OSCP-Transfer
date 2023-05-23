@@ -1,7 +1,22 @@
 # OSCP-FIleTransfer
 This repo for making it easy to transfer files on the OSCP exam using FTP,PUT,SMB
 
+## Instaltion
+```python
+# clone the repo
+$ git clonehttps://github.com/Bit-ByteBandit/OSCP-FIleTransfer.git
 
+# change the working directory to OSCP-FIleTransfer
+$ cd OSCP-FIleTransfer
+
+# install the requirements
+$ pip install argparse pyftpdlib impacket
+```
+
+
+$pip install argparse pyftpdlib impacket
+
+```
 ## Usage
 
 ```python

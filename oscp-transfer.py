@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 import os
 import threading
@@ -70,8 +71,8 @@ def main():
     parser.add_argument('-m', '--method', choices=['PUT', 'put', 'ftp', 'FTP', 'SMB', 'smb'], help='Transfer method')
     parser.add_argument('-l', '--port', type=int, help='Port to listen on - FTP 21 by Default')
     parser.add_argument('-d', '--directory', default='.', help='FTP or SMB - #specify working directory or `.` by Default - Directory for file storage')
-    parser.add_argument('-u', '--username', default='user', help='FTP Only - #specify Username or by Default `user`')
-    parser.add_argument('-p', '--password', default='', help='FTP Only - #Default blank')
+    parser.add_argument('-u', '--username', default='ftp', help='FTP Only - #specify Username or by Default `ftp`')
+    parser.add_argument('-p', '--password', default='ftp', help='FTP Only - #Default `ftp`')
     example_text = '''
 examples:
 
@@ -94,6 +95,10 @@ examples:
     elif args.method == 'ftp' or args.method == 'FTP':
         if args.port is None:
             args.port = 21
+        if args.username is None:
+            args.username = 'ftp'
+        if args.password is None:
+            args.password = 'ftp'
         listen_ftp(args.port, args.directory, args.username, args.password)
     elif args.method == 'smb' or args.method == 'SMB':
         if args.directory:

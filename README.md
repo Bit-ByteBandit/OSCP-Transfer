@@ -22,12 +22,12 @@ options:
                         Transfer method
   -l PORT, --port PORT  Port to listen on - FTP 21 by Default
   -d DIRECTORY, --directory DIRECTORY
-                        FTP or SMB - #specify working directory or `.` by Default - Directory
+                        FTP or SMB - #specify working directory or `SHARE` by Default - Directory
                         for file storage
   -u USERNAME, --username USERNAME
-                        FTP Only - #specify Username or by Default `user`
+                        FTP Only - #specify Username or by Default `ftp`
   -p PASSWORD, --password PASSWORD
-                        FTP Only - #Default blank
+                        FTP Only - #Default `ftp`
 
 examples:
 

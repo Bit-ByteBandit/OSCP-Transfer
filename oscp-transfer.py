@@ -70,7 +70,7 @@ def main():
     )
     parser.add_argument('-m', '--method', choices=['PUT', 'put', 'ftp', 'FTP', 'SMB', 'smb'], help='Transfer method')
     parser.add_argument('-l', '--port', type=int, help='Port to listen on - FTP 21 by Default')
-    parser.add_argument('-d', '--directory', default='.', help='FTP or SMB - #specify working directory or `.` by Default - Directory for file storage')
+    parser.add_argument('-d', '--directory', default='.', help='FTP or SMB - #specify working directory or `SHARE` by Default - Directory for file storage')
     parser.add_argument('-u', '--username', default='ftp', help='FTP Only - #specify Username or by Default `ftp`')
     parser.add_argument('-p', '--password', default='ftp', help='FTP Only - #Default `ftp`')
     example_text = '''

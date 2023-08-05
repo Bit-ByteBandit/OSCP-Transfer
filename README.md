@@ -18,7 +18,7 @@ $ python3 -m pip install -r requirements.txt
 ```python
 options:
   -h, --help            show this help message and exit
-  -m {PUT,put,ftp,FTP,SMB,smb}, --method {PUT,put,ftp,FTP,SMB,smb}
+  -m {PUT,put,ftp,FTP,SMB,smb,get,GET}, --method {PUT,put,ftp,FTP,SMB,smb}
                         Transfer method
   -l PORT, --port PORT  Port to listen on - FTP 21 by Default
   -d DIRECTORY, --directory DIRECTORY
@@ -30,28 +30,34 @@ options:
                         FTP Only - #Default `ftp`
 
 examples:
+    oscp-transfer.py -m GET -l 80
 
-    oscptransfer.py -m PUT -l 80
+    oscp-transfer.py -m PUT -l 80
 
-    oscptransfer.py -m ftp -l 21 -d /path/to/directory -u username -p password
+    oscp-transfer.py -m ftp -l 21 -d /path/to/directory -u username -p password
 
-    oscptransfer.py -m smb -d /path/to/directory
+    oscp-transfer.py -m smb -d /path/to/directory
 
 
 ```
 
 SMB-Server
 ```python
-python3 oscptransfer.py -m SMB
+python3 oscp-transfer.py -m SMB
 
 ```
 FTP-Server
 ```python
-python3 oscptransfer.py -m FTP 
+python3 oscp-transfer.py -m FTP 
 
 ```
 PUT-HTTP Server
 ```python
-python3 oscptransfer.py -m PUT -p 80
+python3 oscp-transfer.py -m PUT -p 80
+
+```
+GET-HTTP Server
+```python
+python3 oscp-transfer.py -m GET -p 80
 
 ```

@@ -13,15 +13,12 @@ This repository provides a streamlined solution for file transfers during the OS
 1. Clone the Repository:
 
 ```
-
 $ git clone https://github.com/Bit-ByteBandit/OSCP-FIleTransfer.git
 
 ```
-
 2. Navigate to the Directory:
 
 ```
-
 $ cd OSCP-FIleTransfer
 
 ```
@@ -29,7 +26,6 @@ $ cd OSCP-FIleTransfer
 3. Install Dependencies:
 
 ```
-
 $ python3 -m pip install -r requirements.txt
 
 ```

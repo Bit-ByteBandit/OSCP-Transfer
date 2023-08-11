@@ -1,63 +1,72 @@
-# OSCP-FIleTransfer
+# OSCP File Transfer Tool
 
-i write this repo to make it easy to transfer files on the OSCP exam using FTP,PUT,SMB protocols
+This repository provides a streamlined solution for file transfers during the OSCP exam using various protocols, including FTP, PUT, and SMB.
 
-## Instaltion
-```
-# clone the repo
-$ git clone https://github.com/Bit-ByteBandit/OSCP-FIleTransfer.git
+## Installation
 
-# change the working directory to OSCP-FIleTransfer
-$ cd OSCP-FIleTransfer
+1. Clone the Repository:
 
-# install the requirements
-$ python3 -m pip install -r requirements.txt
-```
+   $ git clone https://github.com/Bit-ByteBandit/OSCP-FIleTransfer.git
+
+2. Navigate to the Directory:
+
+   $ cd OSCP-FIleTransfer
+
+3. Install Dependencies:
+
+   $ python3 -m pip install -r requirements.txt
+
 ## Usage
 
-```python
-options:
-  -h, --help            show this help message and exit
-  -m {PUT,put,ftp,FTP,SMB,smb,get,GET}, --method {PUT,put,ftp,FTP,SMB,smb}
-                        Transfer method
-  -l PORT, --port PORT  Port to listen on - FTP 21 by Default
-  -d DIRECTORY, --directory DIRECTORY
-                        FTP or SMB - #specify working directory or `SHARE` by Default - Directory
-                        for file storage
-  -u USERNAME, --username USERNAME
-                        FTP Only - #specify Username or by Default `ftp`
-  -p PASSWORD, --password PASSWORD
-                        FTP Only - #Default `ftp`
+The tool offers flexible transfer methods and customizable options:
 
-examples:
-    oscp-transfer.py -m GET -l 80
+python3 oscp-transfer.py -m {METHOD} [options]
 
-    oscp-transfer.py -m PUT -l 80
+Options:
 
-    oscp-transfer.py -m ftp -l 21 -d /path/to/directory -u username -p password
+- -h, --help: Display the help message and exit.
+- -m {PUT, FTP, SMB, GET}: Choose the transfer method.
+- -l PORT: Specify the listening port (default: 21 for FTP).
+- -d DIRECTORY: For FTP or SMB, set the working directory (default: SHARE for SMB).
+- -u USERNAME: Provide the FTP username (default: ftp).
+- -p PASSWORD: Provide the FTP password (default: ftp).
 
-    oscp-transfer.py -m smb -d /path/to/directory
+Examples:
 
+- Initiate a GET server on port 80:
 
-```
+  python3 oscp-transfer.py -m GET -l 80
 
-SMB-Server
-```python
+- Initiate a PUT server on port 80:
+
+  python3 oscp-transfer.py -m PUT -l 80
+
+- Use FTP with custom options:
+
+  python3 oscp-transfer.py -m ftp -l 21 -d /path/to/directory -u username -p password
+
+- Use SMB with a specific directory:
+
+  python3 oscp-transfer.py -m smb -d /path/to/directory
+
+## Running Servers
+
+Start SMB Server:
+
 python3 oscp-transfer.py -m SMB
 
-```
-##FTP-Server
-```python
-python3 oscp-transfer.py -m FTP 
+Start FTP Server:
 
-```
-PUT-HTTP Server
-```python
+python3 oscp-transfer.py -m FTP
+
+Start PUT-HTTP Server:
+
 python3 oscp-transfer.py -m PUT -p 80
 
-```
-GET-HTTP Server
-```python
-python3 oscp-transfer.py -m GET -p 80
+Upload a file using PUT request:
 
-```
+curl http://[IP] -T [File]
+
+Start GET-HTTP Server:
+
+python3 oscp-transfer.py -m GET -p 80

@@ -5,23 +5,23 @@ This repository provides a streamlined solution for file transfers during the OS
 ## Installation
 
 1. Clone the Repository:
-
+```
    $ git clone https://github.com/Bit-ByteBandit/OSCP-FIleTransfer.git
-
+```
 2. Navigate to the Directory:
-
+```
    $ cd OSCP-FIleTransfer
-
+```
 3. Install Dependencies:
-
+```
    $ python3 -m pip install -r requirements.txt
-
+```
 ## Usage
 
 The tool offers flexible transfer methods and customizable options:
-
+```
 python3 oscp-transfer.py -m {METHOD} [options]
-
+```
 Options:
 
 - -h, --help: Display the help message and exit.
@@ -34,39 +34,40 @@ Options:
 Examples:
 
 - Initiate a GET server on port 80:
-
+```
   python3 oscp-transfer.py -m GET -l 80
-
+```
 - Initiate a PUT server on port 80:
-
+```
   python3 oscp-transfer.py -m PUT -l 80
-
+```
 - Use FTP with custom options:
-
+```
   python3 oscp-transfer.py -m ftp -l 21 -d /path/to/directory -u username -p password
-
+```
 - Use SMB with a specific directory:
-
+```
   python3 oscp-transfer.py -m smb -d /path/to/directory
-
+```
 ## Running Servers
 
 Start SMB Server:
-
+```
 python3 oscp-transfer.py -m SMB
-
+```
 Start FTP Server:
-
+```
 python3 oscp-transfer.py -m FTP
-
+```
 Start PUT-HTTP Server:
-
+```
 python3 oscp-transfer.py -m PUT -p 80
-
+```
 Upload a file using PUT request:
 
 curl http://[IP] -T [File]
 
 Start GET-HTTP Server:
-
+```
 python3 oscp-transfer.py -m GET -p 80
+```

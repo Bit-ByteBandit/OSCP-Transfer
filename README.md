@@ -46,7 +46,7 @@ SMB-Server
 python3 oscp-transfer.py -m SMB
 
 ```
-FTP-Server
+##FTP-Server
 ```python
 python3 oscp-transfer.py -m FTP 
 

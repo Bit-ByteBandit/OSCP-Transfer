@@ -15,6 +15,7 @@ This repository provides a streamlined solution for file transfers during the OS
 ```
 $ git clone https://github.com/Bit-ByteBandit/OSCP-FIleTransfer.git
 ```
+
 2. Navigate to the Directory:
 
 ```
@@ -105,16 +106,11 @@ Start FTP Server:
 python3 oscp-transfer.py -m FTP
 ```
 
-  
-
 Start PUT-HTTP Server:
-
-  
 
 ```
 python3 oscp-transfer.py -m PUT
 ```
-
 Upload a file using **PUT** request:
 
 ```

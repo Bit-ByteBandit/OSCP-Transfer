@@ -5,7 +5,7 @@ This repository provides a streamlined solution for file transfers during the OS
 ## Installation
 
 1. Clone the Repository:
-```
+```bash
    $ git clone https://github.com/Bit-ByteBandit/OSCP-FIleTransfer.git
 ```
 2. Navigate to the Directory:

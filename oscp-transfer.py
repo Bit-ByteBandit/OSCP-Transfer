@@ -39,7 +39,8 @@ def listen_put(port):
         httpd.serve_forever()
     except KeyboardInterrupt:
         print("\nStopping HTTP Server")
-
+    except Exception as e:
+        print("Exception:", e)
 # http get request server to download files
 def listen_get(port):
     handler = http.server.SimpleHTTPRequestHandler
@@ -47,31 +48,48 @@ def listen_get(port):
         interface_check('HTTP GET',port)
         try:
             server.serve_forever()
+
         except KeyboardInterrupt:
             print("\nServer stopped.")
+        except Exception as e:
+            print("Exception:", e)
 
 
 def listen_ftp(port, directory, username, password):
-    authorizer = DummyAuthorizer()
-    authorizer.add_user(username, password, directory, perm="elradfmw")
-    handler = FTPHandler
-    handler.authorizer = authorizer
-    interface_check('FTP',port)
-    server = FTPServer(("0.0.0.0", port), handler)
-    server.serve_forever()
-
-
-def listen_smb(directory):
     try:
-            server = smbserver.SimpleSMBServer()
-            server.addShare('share', directory)
-            interface_check('SMB','445')
+            authorizer = DummyAuthorizer()
+            authorizer.add_user(username, password, directory, perm="elradfmw")
+            handler = FTPHandler
+            handler.authorizer = authorizer
+            interface_check('FTP',port)
+            server = FTPServer(("0.0.0.0", port), handler)
+            server.serve_forever()
+    except KeyboardInterrupt:
+         print("\nKeyboard interrupt received. Stopping the SMB server.")
+    except Exception as e:
+         print("Exception:", e)
+
+
+def listen_smb(directory,port,sharename):
+    try:
+        
+            server = smbserver.SimpleSMBServer(listenAddress='0.0.0.0', listenPort=int(port))
+            server.addShare(sharename, directory)
+            interface_check('SMB',port)
+            print('\n')
             server.setSMB2Support(True)
             server.setSMBChallenge('')
+            server.setLogFile('')
+            # Start the SMB server
             server.start()
+            
 
     except KeyboardInterrupt:
-        print("\nStopping SMB Server")
+        print("\nKeyboard interrupt received. Stopping the SMB server.")
+
+    except Exception as e:
+        print("Exception:", e)
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -80,10 +98,11 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument('-m', '--method', choices=['PUT', 'put', 'ftp', 'FTP', 'SMB', 'smb', 'get', 'GET'], help='Transfer method')
-    parser.add_argument('-l', '--port', type=int, help='Port to listen on - FTP 21 by Default')
+    parser.add_argument('-l', '--port', type=int, help='Port to listen on - #FTP 21 by Default - #SMB 445 By Default')
     parser.add_argument('-d', '--directory', default='.', help='FTP or SMB - #specify working directory or `.` by Default - Directory for file storage')
-    parser.add_argument('-u', '--username', default='ftp', help='FTP Only - #specify Username or by Default `ftp`')
-    parser.add_argument('-p', '--password', default='ftp', help='FTP Only - #Default `ftp`')
+    parser.add_argument('-u', '--username', default='FTP', help='FTP Only #specify Username or by Default `ftp`')
+    parser.add_argument('-p', '--password', default='FTP', help='FTP Only #Default `ftp`')
+    parser.add_argument('-sh', '--sharename', default='share', help='SMB Share-name By #Default `share`')
     example_text = '''
 examples:
     %(prog)s -m GET -l 80
@@ -92,38 +111,48 @@ examples:
 
     %(prog)s -m ftp -l 21 -d /path/to/directory -u username -p password
 
-    %(prog)s -m smb -d /path/to/directory
+    %(prog)s -m smb 
 
 '''
 
     parser.epilog = example_text
     args = parser.parse_args()
 
-    if args.method == 'PUT' or args.method == 'put':
-        if args.port is None:
-            args.port = 80
-            
-        listen_put(args.port)
+    allowed_methods = ['SMB', 'GET', 'PUT', 'FTP']
+
+    if args.method.upper() in allowed_methods:
         
-    elif args.method == 'ftp' or args.method == 'FTP':
-        if args.port is None:
-            args.port = 21
-        if args.username is None:
-            args.username = 'ftp'
-        if args.password is None:
-            args.password = 'ftp'
-        listen_ftp(args.port, args.directory, args.username, args.password)
-    elif args.method == 'smb' or args.method == 'SMB':
-        if args.directory:
-            listen_smb(args.directory)
-        else:
-            print('Please provide directory for the SMB server.')
-    if args.method == 'get' or args.method == 'GET':
-        if args.port is None:
-            args.port = 80
-        listen_get(args.port)
+        if args.method.upper() == 'PUT':
+
+            if args.port is None:
+                args.port = 80
+                
+            listen_put(args.port)
+            
+        elif args.method.upper() == 'FTP':
+
+            if args.port is None:
+                args.port = 21
+            if args.username is None:
+                args.username = 'ftp'
+            if args.password is None:
+                args.password = 'ftp'
+            listen_ftp(args.port, args.directory, args.username, args.password)
+
+        elif args.method.upper() == 'SMB':
+            if args.port is None:
+                args.port = 445
+
+            listen_smb(args.directory, args.port, args.sharename)
+
+        if args.method.upper() == 'GET':
+
+            if args.port is None:
+                args.port = 80
+                
+            listen_get(args.port)
     else:
-         print('Invalid transfer method. Please choose one of the available options.')
+        print('Invalid transfer method. Please choose one of the available options.')
 
 
 if __name__ == '__main__':

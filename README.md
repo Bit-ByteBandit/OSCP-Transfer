@@ -81,7 +81,7 @@ python3 oscp-transfer.py -m ftp -l 21 -d /path/to/directory -u username -p passw
 - Use SMB with a specific directory:
 
 ```
-python3 oscp-transfer.py -m smb -d /path/to/directory
+python3 oscp-transfer.py -m smb -d /path/to/directory -sh MySharefoo
 ```
 
 ## Running Servers

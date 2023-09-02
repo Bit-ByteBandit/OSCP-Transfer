@@ -10,6 +10,7 @@ from pyftpdlib.authorizers import DummyAuthorizer
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 from impacket import smbserver
+from impacket.ntlm import compute_lmhash, compute_nthash
 
 class FileUploadHandler(http.server.BaseHTTPRequestHandler):
     def do_PUT(self):
@@ -70,23 +71,27 @@ def listen_ftp(port, directory, username, password):
          print("Exception:", e)
 
 
-def listen_smb(directory,port,sharename):
+def listen_smb(directory, port, sharename, username, password, SMB2Support):
     try:
-        
-            server = smbserver.SimpleSMBServer(listenAddress='0.0.0.0', listenPort=int(port))
-            server.addShare(sharename, directory)
-            interface_check('SMB',port)
-            print('\n')
-            server.setSMB2Support(True)
-            server.setSMBChallenge('')
-            server.setLogFile('')
-            # Start the SMB server
-            server.start()
-            
+        server = smbserver.SimpleSMBServer(listenAddress='0.0.0.0', listenPort=int(port))
+        server.addShare(sharename, directory, 'SMB Share')
+        interface_check('SMB', port)
+        server.setSMB2Support(SMB2Support)
+        server.setSMBChallenge('')
+        server.setLogFile('')
+
+        # Calculate the LM hash and NT hash based on the provided password
+       
+
+        if username is not None:
+              lmhash = compute_lmhash(password)
+              nthash = compute_nthash(password)
+              server.addCredential(username, '0',lmhash, nthash)
+
+        server.start()
 
     except KeyboardInterrupt:
         print("\nKeyboard interrupt received. Stopping the SMB server.")
-
     except Exception as e:
         print("Exception:", e)
 
@@ -100,18 +105,19 @@ def main():
     parser.add_argument('-m', '--method', choices=['PUT', 'put', 'ftp', 'FTP', 'SMB', 'smb', 'get', 'GET'], help='Transfer method')
     parser.add_argument('-l', '--port', type=int, help='Port to listen on - #FTP 21 by Default - #SMB 445 By Default')
     parser.add_argument('-d', '--directory', default='.', help='FTP or SMB - #specify working directory or `.` by Default - Directory for file storage')
-    parser.add_argument('-u', '--username', default='FTP', help='FTP Only #specify Username or by Default `ftp`')
-    parser.add_argument('-p', '--password', default='FTP', help='FTP Only #Default `ftp`')
+    parser.add_argument('-u', '--username', help='Specifies the username, SMB OR FTP. The default FTP user is `user`.')
+    parser.add_argument('-p', '--password', help='Specifies the password, SMB OR FTP. The default FTP pass is `user`.')
     parser.add_argument('-sh', '--sharename', default='share', help='SMB Share-name By #Default `share`')
+    parser.add_argument('-smb2', '--SMB2Support', action='store_true' , help='adding SMB2Support By Default = `False`')
     example_text = '''
 examples:
-    %(prog)s -m GET -l 80
+    %(prog)s -m GET 
 
-    %(prog)s -m PUT -l 80
+    %(prog)s -m PUT 
 
-    %(prog)s -m ftp -l 21 -d /path/to/directory -u username -p password
+    %(prog)s -m ftp 
 
-    %(prog)s -m smb 
+    %(prog)s -m smb -u oscp -p oscp -smb2
 
 '''
 
@@ -134,16 +140,19 @@ examples:
             if args.port is None:
                 args.port = 21
             if args.username is None:
-                args.username = 'ftp'
+                args.username = 'user'
             if args.password is None:
-                args.password = 'ftp'
+                args.password = 'user'
+
             listen_ftp(args.port, args.directory, args.username, args.password)
 
         elif args.method.upper() == 'SMB':
+
             if args.port is None:
                 args.port = 445
 
-            listen_smb(args.directory, args.port, args.sharename)
+            # Provide username and password for authentication
+            listen_smb(args.directory, args.port, args.sharename, args.username, args.password,args.SMB2Support)
 
         if args.method.upper() == 'GET':
 

@@ -78,7 +78,7 @@ python3 oscp-transfer.py -m PUT -l 80
 python3 oscp-transfer.py -m ftp -l 21 -d /path/to/directory -u username -p password
 ```
 
-- Use SMB with a specific directory:
+- Use SMB with a username and a password:
 
 ```
 python3 oscp-transfer.py -m smb -u foo -p foo -sh MySharefoo -smb2

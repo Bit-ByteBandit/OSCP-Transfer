@@ -50,9 +50,9 @@ Options:
 
 - -d DIRECTORY: For FTP or SMB, set the working directory (default: SHARE for SMB).
 
-- -u USERNAME: Provide the FTP username (default: ftp).
+- -u USERNAME: Provide the FTP or smb username (default for ftp only: user).
 
-- -p PASSWORD: Provide the FTP password (default: ftp).
+- -p PASSWORD: Provide the FTP or smb password (default for ftp only: user).
 
   
 
@@ -81,7 +81,7 @@ python3 oscp-transfer.py -m ftp -l 21 -d /path/to/directory -u username -p passw
 - Use SMB with a specific directory:
 
 ```
-python3 oscp-transfer.py -m smb -d /path/to/directory -sh MySharefoo
+python3 oscp-transfer.py -m smb -u foo -p foo -sh MySharefoo -smb2
 ```
 
 ## Running Servers

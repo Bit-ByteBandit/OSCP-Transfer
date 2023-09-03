@@ -48,7 +48,9 @@ Options:
 
 - -l PORT: Specify the listening port (default: 21 for FTP).
 
-- -d DIRECTORY: For FTP or SMB, set the working directory (default: SHARE for SMB).
+- -d DIRECTORY: For FTP or SMB, set the working directory
+  
+- -sh SHARE name for SMB.
 
 - -u USERNAME: Provide the FTP or smb username (default for ftp only: user).
 

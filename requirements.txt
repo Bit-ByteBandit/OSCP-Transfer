@@ -1,3 +1,5 @@
-impacket==0.9.23
-psutil==5.9.0
+impacket==0.9.24
+impacket==0.9.22
+psutil==5.9.5
+psutil==5.9.4
 pyftpdlib==1.5.7

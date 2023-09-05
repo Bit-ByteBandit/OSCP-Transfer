@@ -35,7 +35,7 @@ $ python3 -m pip install -r requirements.txt
 The tool offers flexible transfer methods and customizable options:
 
 ```
-python3 oscp-transfer.py -m {METHOD} [options]
+oscp-transfer.py -m {METHOD} [options]
 ```
 
 Options:
@@ -65,25 +65,25 @@ Examples:
 - Initiate a GET server on port 80:
 
 ```
-python3 oscp-transfer.py -m GET -l 80
+oscp-transfer.py -m GET -l 80
 ```
 
 - Initiate a PUT server on port 80:
 
 ```
-python3 oscp-transfer.py -m PUT -l 80
+oscp-transfer.py -m PUT -l 80
 ```
 
 - Use FTP with custom options:
 
 ```
-python3 oscp-transfer.py -m ftp -l 21 -d /path/to/directory -u username -p password
+oscp-transfer.py -m ftp -l 21 -d /path/to/directory -u username -p password
 ```
 
 - Use SMB with a username and a password:
 
 ```
-python3 oscp-transfer.py -m smb -u foo -p foo -sh MySharefoo -smb2
+oscp-transfer.py -m smb -u foo -p foo -sh MySharefoo -smb2
 ```
 
 ## Running Servers
@@ -93,19 +93,19 @@ python3 oscp-transfer.py -m smb -u foo -p foo -sh MySharefoo -smb2
 Start GET-HTTP Server:
 
 ```
-python3 oscp-transfer.py -m GET
+oscp-transfer.py -m GET
 ```
 
 Start SMB Server:
 
 ```
-python3 oscp-transfer.py -m SMB
+oscp-transfer.py -m SMB
 ```
 
 Start FTP Server:
 
 ```
-python3 oscp-transfer.py -m FTP
+oscp-transfer.py -m FTP
 ```
 
 Start PUT-HTTP Server:

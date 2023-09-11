@@ -127,7 +127,7 @@ examples:
 
     allowed_methods = ['SMB', 'GET', 'PUT', 'FTP']
     if len(sys.argv) < 2:
-        print("invalid command")
+        print("oscp-transfer -m [METHOD] -l [PORT] -d [DIRECTORY] -u [USERNAME] -p [PASSWORD]")
         return 
     if args.method.upper() in allowed_methods:
         

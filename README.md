@@ -25,7 +25,7 @@ $ cd OSCP-FIleTransfer
 3. Install Dependencies:
 
 ```
-$ python3 -m pip install -r requirements.txt
+$ chmod +x ./install.sh; ./install.sh
 ```
 
 ## Usage
@@ -35,7 +35,7 @@ $ python3 -m pip install -r requirements.txt
 The tool offers flexible transfer methods and customizable options:
 
 ```
-oscp-transfer.py -m {METHOD} [options]
+oscp-transfer -m {METHOD} [options]
 ```
 
 Options:
@@ -65,25 +65,25 @@ Examples:
 - Initiate a GET server on port 80:
 
 ```
-oscp-transfer.py -m GET -l 80
+oscp-transfer -m GET -l 80
 ```
 
 - Initiate a PUT server on port 80:
 
 ```
-oscp-transfer.py -m PUT -l 80
+oscp-transfer -m PUT -l 80
 ```
 
 - Use FTP with custom options:
 
 ```
-oscp-transfer.py -m ftp -l 21 -d /path/to/directory -u username -p password
+oscp-transfer -m ftp -l 21 -d /path/to/directory -u username -p password
 ```
 
 - Use SMB with a username and a password:
 
 ```
-oscp-transfer.py -m smb -u foo -p foo -sh MySharefoo -smb2
+oscp-transfer -m smb -u foo -p foo -sh MySharefoo -smb2
 ```
 
 ## Running Servers
@@ -93,25 +93,25 @@ oscp-transfer.py -m smb -u foo -p foo -sh MySharefoo -smb2
 Start GET-HTTP Server:
 
 ```
-oscp-transfer.py -m GET
+oscp-transfer -m GET
 ```
 
 Start SMB Server:
 
 ```
-oscp-transfer.py -m SMB
+oscp-transfer -m SMB
 ```
 
 Start FTP Server:
 
 ```
-oscp-transfer.py -m FTP
+oscp-transfer -m FTP
 ```
 
 Start PUT-HTTP Server:
 
 ```
-python3 oscp-transfer.py -m PUT
+oscp-transfer -m PUT
 ```
 Upload a file using **PUT** request:
 

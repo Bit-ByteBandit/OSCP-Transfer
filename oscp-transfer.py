@@ -11,6 +11,7 @@ from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 from impacket import smbserver
 from impacket.ntlm import compute_lmhash, compute_nthash
+import sys
 
 class FileUploadHandler(http.server.BaseHTTPRequestHandler):
     def do_PUT(self):
@@ -99,7 +100,7 @@ def listen_smb(directory, port, sharename, username, password, SMB2Support):
 def main():
     parser = argparse.ArgumentParser(
         description='File Transfer Listener',
-        usage='%(prog)s -m [METHOD] -p [PORT] -d [DIRECTORY] -u [USERNAME] -p [PASSWORD]',
+        usage='%(prog)s -m [METHOD] -l [PORT] -d [DIRECTORY] -u [USERNAME] -p [PASSWORD]',
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument('-m', '--method', choices=['PUT', 'put', 'ftp', 'FTP', 'SMB', 'smb', 'get', 'GET'], help='Transfer method')
@@ -125,7 +126,9 @@ examples:
     args = parser.parse_args()
 
     allowed_methods = ['SMB', 'GET', 'PUT', 'FTP']
-
+    if len(sys.argv) < 2:
+        print("invalid command")
+        return 
     if args.method.upper() in allowed_methods:
         
         if args.method.upper() == 'PUT':

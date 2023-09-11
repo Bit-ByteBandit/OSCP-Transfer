@@ -50,7 +50,7 @@ Options:
 
 - -d DIRECTORY: For FTP or SMB, set the working directory
   
-- -sh SHARE name for SMB.
+- -sh SHARE name for SMB (default: SHARE)
 
 - -u USERNAME: Provide the FTP or smb username (default for ftp only: user).
 

@@ -7,4 +7,5 @@ sudo cp oscp-transfer.py /usr/bin/oscp-transfer
 sudo chmod +x /usr/bin/oscp-transfer
 echo "[+] refresh the terminal"
 . ~/.bashrc
+. ~/.zshrc
 echo "[+] Done"

@@ -2,7 +2,7 @@
 
   
 
-This repository provides a streamlined solution for file transfers during the OSCP exam using various protocols, including FTP, PUT, and SMB.
+This repository provides a streamlined solution for file transfers during the OSCP exam using various protocols, including FTP, PUT, GET and SMB.
 
   
 

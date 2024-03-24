@@ -13,13 +13,13 @@ This repository provides a streamlined solution for file transfers during the OS
 1. Clone the Repository:
 
 ```
-$ git clone https://github.com/Bit-ByteBandit/OSCP-FIleTransfer.git
+$ git clone https://github.com/Bit-ByteBandit/OSCP-Transfer.git
 ```
 
 2. Navigate to the Directory:
 
 ```
-$ cd OSCP-FIleTransfer
+$ cd OSCP-Transfer
 ```
 
 3. Install Dependencies:
